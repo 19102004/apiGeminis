@@ -30,8 +30,8 @@ app.post("/usuarios", async (req, res) => {
 
 app.get("/usuarios/resumen", async (req, res) => {
     try {
-      const usuarios = await Usuario.find({}, "nombre telefono tipo");
-  
+      const usuarios = await Usuario.find({}, "nombre telefono tipo torre departamento");
+        
       res.status(200).json(usuarios);
     } catch (error) {
       console.error("Error al obtener el resumen de usuarios:", error);
