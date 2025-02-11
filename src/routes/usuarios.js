@@ -1,8 +1,6 @@
 const express = require("express");
 const Usuario = require("../models/usuario"); 
 const app = express();
-const jwt = require('jsonwebtoken');
-
 
 app.use(express.json()); 
 
@@ -42,6 +40,8 @@ app.get("/usuarios/resumen", async (req, res) => {
   });
 
 
+  const jwt = require('jsonwebtoken');
+
   app.get("/usuarios/existe", async (req, res) => {
     try {
       const { telefono, password } = req.query;
@@ -55,8 +55,8 @@ app.get("/usuarios/resumen", async (req, res) => {
       if (usuario) {
         const token = jwt.sign(
           { id: usuario._id, telefono: usuario.telefono, tipo: usuario.tipo }, 
-          "tu_clave_secreta", 
-          { expiresIn: "60s" } // Token expira en 60 segundos
+          'tu_clave_secreta', 
+          { expiresIn: '1h' } 
         );
   
         res.status(200).json({
