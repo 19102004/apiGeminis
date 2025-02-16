@@ -11,6 +11,15 @@ const app = express();
 // Conectar a MongoDB
 connectDB();
 
+app.use((req, res, next) => {
+  const origin = req.headers.origin || req.headers.host; 
+  if (origin === "http://condominio-geminis.vercel.app" || origin === "http://condominio-geminis.vercel.app") {
+      next(); 
+  } else {
+      res.status(403).json({ error: 'Nel no tienes acceso' }); 
+  }
+});
+
 // Middleware
 app.use(cors()); 
 app.use(express.json());
