@@ -56,7 +56,7 @@ app.get("/usuarios/resumen", async (req, res) => {
         const token = jwt.sign(
           { id: usuario._id, telefono: usuario.telefono, tipo: usuario.tipo }, 
           'tu_clave_secreta', 
-          { expiresIn: '1h' } 
+          { expiresIn: '3m' } // Cambiado a 1 minuto
         );
   
         res.status(200).json({
@@ -77,6 +77,7 @@ app.get("/usuarios/resumen", async (req, res) => {
       res.status(500).json({ mensaje: "Error al comprobar si el usuario existe" });
     }
   });
+  
   
   
   
