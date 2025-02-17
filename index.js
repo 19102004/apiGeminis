@@ -13,7 +13,7 @@ connectDB();
 
 app.use((req, res, next) => {
   const origin = req.headers.origin || req.headers.host; 
-  if (origin === "http://condominio-geminis.vercel.app" || origin === "http://condominio-geminis.vercel.app") {
+  if (origin === "https://condominio-geminis.vercel.app" || origin === "https://condominio-geminis.vercel.app") {
       next(); 
   } else {
       res.status(403).json({ error: 'Nel no tienes acceso' }); 
