@@ -8,7 +8,7 @@ const usuarios = require("./src/routes/usuarios");
 const notificaciones = require("./src/routes/notificaciones");
 const app = express();
 
-// Conectar a MongoDB
+//   http://localhost:5173  
 connectDB();
 
 app.use((req, res, next) => {
@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 });
 
 // Middleware
-app.use(cors()); 
+app.use(cors());
 app.use(express.json());
 
 // Rutas
