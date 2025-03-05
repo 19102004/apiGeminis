@@ -183,23 +183,18 @@ app.get("/usuarios/resumen", async (req, res) => {
   
   app.get("/usuarios/depa", async (req, res) => {
     try {
-      // Obtener el id del usuario desde la consulta (query) o desde el body (dependiendo de la implementación)
       const { id } = req.query;
   
-      // Verificamos si se proporciona el id
       if (!id) {
         return res.status(400).json({ mensaje: "El ID del usuario es requerido" });
       }
   
-      // Buscar el usuario por su id y extraer los campos deseados
       const usuario = await Usuario.findById(id, "nombre telefono tipo torre departamento");
   
-      // Verificar si el usuario existe
       if (!usuario) {
         return res.status(404).json({ mensaje: "Usuario no encontrado" });
       }
   
-      // Enviar la respuesta con los datos del usuario
       res.status(200).json(usuario);
     } catch (error) {
       console.error("Error al obtener el resumen de usuarios:", error);
