@@ -100,12 +100,16 @@ app.get("/usuarios/resumen", async (req, res) => {
 
   app.get("/usuarios/existe", async (req, res) => {
     console.log(req.query);
-
+  
     try {
-      const { telefono, password, recordar } = req.query;
+      let { telefono, password, recordar } = req.query;
   
       if (!telefono || !password) {
         return res.status(400).json({ mensaje: "El número de teléfono y la contraseña son requeridos" });
+      }
+  
+      if (!telefono.startsWith("52")) {
+        telefono = `52${telefono}`;
       }
   
       const usuario = await Usuario.findOne({ telefono, password });
@@ -117,11 +121,11 @@ app.get("/usuarios/resumen", async (req, res) => {
       const tokenTemporal = jwt.sign(
         { id: usuario._id, telefono: usuario.telefono, tipo: usuario.tipo },
         "tu_clave_secreta",
-        { expiresIn: "3m" }
+        { expiresIn: "5m" }
       );
   
       let tokenPermanente = null;
-      
+  
       if (recordar === "true") {
         tokenPermanente = jwt.sign(
           { id: usuario._id, telefono: usuario.telefono, tipo: usuario.tipo },
@@ -156,6 +160,7 @@ app.get("/usuarios/resumen", async (req, res) => {
       res.status(500).json({ mensaje: "Error al comprobar si el usuario existe" });
     }
   });
+  
 
 
 

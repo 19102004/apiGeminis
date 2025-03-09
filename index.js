@@ -1,4 +1,3 @@
-// index.js
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors"); 
@@ -12,14 +11,14 @@ const app = express();
 //   http://localhost:5173  
 connectDB();
 
-// app.use((req, res, next) => {
-//   const origin = req.headers.origin || req.headers.host; 
-//   if (origin === "https://condominio-geminis.vercel.app" || origin === "https://condominio-geminis.vercel.app") {
-//       next(); 
-//   } else {
-//       res.status(403).json({ error: 'Nel no tienes acceso' }); 
-//   }
-// });
+app.use((req, res, next) => {
+  const origin = req.headers.origin || req.headers.host; 
+  if (origin === "https://condominio-geminis.vercel.app" || origin === "https://condominio-geminis.vercel.app") {
+      next(); 
+  } else {
+      res.status(403).json({ error: 'Nel no tienes acceso' }); 
+  }
+});
 
 // Middleware
 app.use(cors());
